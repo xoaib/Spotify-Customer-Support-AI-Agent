@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and IDE settings
+.env
+.idea/
+.vscode/
+*.swp
+*.DS_Store
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Pytest / temporary caches
+.pytest_cache/
+data/cache/
+
+# Large datasets & generated binary indexes (reproducible via scripts/prepare_data.py)
+data/raw/
+data/processed/*.pkl
+data/processed/*.jsonl
+
+# Keep evaluation result summaries
+!data/processed/*.json

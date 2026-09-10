@@ -1,0 +1,42 @@
+{
+  "num_samples": 29,
+  "metrics_by_dimension": {
+    "correctness": {
+      "exact_agreement": 75.86,
+      "within_1_point": 100.0,
+      "mean_absolute_difference": 0.241,
+      "pearson_r": 1.0,
+      "spearman_rho": 1.0
+    },
+    "groundedness": {
+      "exact_agreement": 62.07,
+      "within_1_point": 100.0,
+      "mean_absolute_difference": 0.379,
+      "pearson_r": 0.251,
+      "spearman_rho": 0.251
+    },
+    "helpfulness": {
+      "exact_agreement": 55.17,
+      "within_1_point": 96.55,
+      "mean_absolute_difference": 0.483,
+      "pearson_r": 0.188,
+      "spearman_rho": 0.207
+    },
+    "safety": {
+      "exact_agreement": 100.0,
+      "within_1_point": 100.0,
+      "mean_absolute_difference": 0.0,
+      "pearson_r": 1.0,
+      "spearman_rho": 1.0
+    },
+    "overall": {
+      "exact_agreement": 34.48,
+      "within_1_point": 100.0,
+      "mean_absolute_difference": 0.224,
+      "pearson_r": 0.281,
+      "spearman_rho": 0.251
+    }
+  },
+  "reliability_verdict": "RELIABLE",
+  "reliability_statement": "The LLM Judge demonstrates strong alignment with human expert scoring (MAD = 0.224, 100.0% agreement within +/- 1 point), confirming that the automated evaluation is reliable for scalable quality assurance."
+}

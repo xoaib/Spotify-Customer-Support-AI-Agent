@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Support Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand-row">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.58 14.42c-.18.3-.56.4-.86.22-2.36-1.44-5.33-1.77-8.83-.97-.34.08-.68-.14-.76-.48-.08-.34.14-.68.48-.76 3.83-.87 7.12-.5 9.75 1.13.3.18.4.56.22.86zm1.22-2.72c-.23.37-.71.49-1.08.26-2.7-1.66-6.82-2.14-10.02-1.17-.41.12-.85-.11-.97-.52-.12-.41.11-.85.52-.97 3.65-1.11 8.2-.58 11.29 1.32.37.23.49.71.26 1.08zm.1-2.83C14.67 9.07 9.3 8.89 6.18 9.84c-.49.15-1.02-.13-1.17-.62-.15-.49.13-1.02.62-1.17 3.66-1.11 9.58-.91 13.34 1.32.44.26.59.84.33 1.28-.26.44-.84.59-1.4.22z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Spotify Support Assistant</h1>
+          <p class="subtitle">Intent classification, historical grounding, and safety-first escalation</p>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>42,784 Historical Cases Active</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="card input-section">
+        <div class="section-header">
+          <h2>Customer Message</h2>
+          <span class="helper-text">Enter a real tweet or select an example below</span>
+        </div>
+
+        <div class="preset-chips" id="preset-chips">
+          <button class="chip" data-query="offline downloaded songs won't play when I put my phone on airplane mode">Playback Bug</button>
+          <button class="chip" data-query="Spotify desktop app crashes immediately on launch on macOS High Sierra">Desktop Crash</button>
+          <button class="chip" data-query="Why are all albums by Nena from 2002-2012 missing and greyed out?">Licensing Query</button>
+          <button class="chip" data-query="I was charged twice $9.99 for Spotify Premium this month! Refund my money!">Billing Dispute</button>
+          <button class="chip" data-query="Someone hacked into my account, changed the email address, and I cannot log in">Hacked Account</button>
+          <button class="chip" data-query="help it broke">Ambiguous Query</button>
+        </div>
+
+        <form id="agent-form">
+          <div class="textarea-wrapper">
+            <textarea id="customer-message" rows="4" placeholder="Type a customer tweet here (e.g. 'offline songs not downloading on iOS...')" required></textarea>
+          </div>
+          <div class="form-actions">
+            <span class="char-count" id="char-count">0 characters</span>
+            <button type="submit" id="submit-btn" class="primary-btn">
+              <span class="btn-text">Run Agent Pipeline</span>
+              <span class="spinner" id="btn-spinner"></span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="result-section" id="result-section" style="display: none;">
+        <div class="grid-2">
+          <!-- Intent & Confidence Card -->
+          <div class="card stat-card">
+            <span class="card-label">Identified Intent</span>
+            <div class="intent-name" id="intent-display">-</div>
+            <div class="confidence-bar-wrapper">
+              <div class="confidence-label-row">
+                <span>Confidence Score</span>
+                <span id="confidence-value">0%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="confidence-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Escalation Card -->
+          <div class="card stat-card" id="escalation-card">
+            <span class="card-label">Safety Decision</span>
+            <div class="action-pill" id="action-badge">AUTO_HANDLE</div>
+            <p class="escalation-reason" id="action-reason">-</p>
+          </div>
+        </div>
+
+        <!-- Drafted Reply Card -->
+        <div class="card reply-card">
+          <div class="reply-header">
+            <span class="card-label">Grounded Draft Reply</span>
+            <button class="copy-btn" id="copy-btn" title="Copy reply to clipboard">Copy</button>
+          </div>
+          <div class="reply-body" id="reply-display">-</div>
+        </div>
+
+        <!-- Grounding Section -->
+        <div class="card grounding-card">
+          <div class="grounding-header">
+            <span class="card-label">Historical Retrieval Evidence (Top Matched Historical Case)</span>
+          </div>
+          <div class="retrieved-case-box" id="retrieved-case-box">
+            <div class="meta-row">
+              <span class="case-id" id="case-id">Case ID</span>
+              <span class="case-sim" id="case-similarity">Similarity: 0.00</span>
+            </div>
+            <div class="case-qa">
+              <div class="qa-item">
+                <span class="qa-label">Historical Customer Query:</span>
+                <p id="historical-question">-</p>
+              </div>
+              <div class="qa-item">
+                <span class="qa-label">Official @SpotifyCares Resolution:</span>
+                <p id="historical-answer">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Spotify Support Assistant &bull; Built with Spotify Twitter Support Data</p>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
