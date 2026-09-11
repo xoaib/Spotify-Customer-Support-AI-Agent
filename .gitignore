@@ -26,3 +26,9 @@ data/processed/*.jsonl
 
 # Keep evaluation result summaries
 !data/processed/*.json
+
+# Local report documents (do not commit to git)
+REPORT.md
+report.html
+*.pdf
+
